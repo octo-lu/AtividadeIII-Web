@@ -23,24 +23,30 @@ class eventoController{
         }
     }
     
-    static async cadastrarEvento(req,res){
-        const novoEvento = req.body
-        const { titulo, descricao, data, local, participantes } = req.body
-        const participanteList = []
-        let participanteEncontrado
-        let eventoCompleto 
-        let eventoCadastro
-        var size = Object.keys(req.body.participantes)
-        console.log(size.length)
-        try{
+    //static async cadastrarEvento(req,res){
+    //    const novoEvento = req.body
+    //    const { titulo, descricao, data, local, participantes } = req.body
+      
+    //    var size = Object.keys(req.body.participantes)
+    //    console.log(size.length)
+    //    try{
             
-            console.log("aqui")
-            const event = await evento.create({ titulo, descricao, data:new Date(data), local})
-            console.log(event)
-            res.status(201).json({message: "Success", event})
+    //        console.log("aqui")
+    //        const event = await evento.create({ titulo, descricao, data:new Date(data), local})
+    //        console.log(event)
+    //        res.status(201).json({message: "Success", event})
             
 
             //res.status(200).json({message: "Evento cadastrado com sucesso", evento: eventoCompleto})
+    //    } catch(error){
+    //        res.status(500).json({message:`${error.message} Erro no cadastro`})
+    //    }
+    //}
+
+    static async cadastrarEvento(req,res){
+        try{
+            const eventoCadastro = await evento.create(req.body);
+            res.status(200).json({message: "Evento cadastrado com sucesso", evento: eventoCadastro})
         } catch(error){
             res.status(500).json({message:`${error.message} Erro no cadastro`})
         }
